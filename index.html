@@ -555,7 +555,7 @@
     .mobile-bottom-bar.is-hidden { transform: translateY(100%); opacity: 0; pointer-events: none; }
     .mobile-bottom-bar .btn { flex: 1; padding: 13px 12px; min-height: 46px; font-size: 11px; letter-spacing: 0.12em; gap: 8px; }
 
-    /* Modal */
+    /* Modal (phone-only booking) */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -574,7 +574,7 @@
     .modal-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; }
     .modal {
       width: 100%;
-      max-width: 520px;
+      max-width: 480px;
       background-color: var(--bg-elevated);
       border: 1px solid var(--border-strong);
       padding: 36px;
@@ -589,27 +589,36 @@
     .modal-overlay.open .modal { transform: translateY(0) scale(1); opacity: 1; }
     .modal-close { position: absolute; top: 18px; right: 20px; font-size: 26px; line-height: 1; color: var(--text-muted); padding: 4px 8px; }
     .modal-close:hover { color: var(--text); }
-    .modal-title { font-family: var(--serif); font-size: 32px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
-    .modal-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-    .form-group label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%;
-      background-color: var(--bg);
-      border: 1px solid var(--border);
+    .modal-title { font-family: var(--serif); font-size: 32px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; padding-right: 28px; }
+    .modal-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
+    .booking-phone-box {
+      padding: 22px 20px;
+      border: 1px solid var(--border-strong);
+      background-color: rgba(197, 164, 126, 0.06);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .booking-phone-label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .booking-phone-number {
+      display: inline-block;
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 5vw, 2.3rem);
+      font-weight: 600;
+      letter-spacing: 0.04em;
       color: var(--text);
-      padding: 12px 14px;
-      font-family: inherit;
-      font-size: 14px;
-      outline: none;
-      transition: border-color var(--transition), box-shadow var(--transition);
+      line-height: 1.2;
     }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(197, 164, 126, 0.55), 0 0 20px rgba(197, 164, 126, 0.22);
-    }
-    .form-success { display: none; padding: 20px; border: 1px solid var(--border-strong); background-color: rgba(197, 164, 126, 0.08); font-size: 14px; line-height: 1.6; box-shadow: 0 0 26px rgba(197, 164, 126, 0.2); animation: menuBlockIn 0.45s ease both; }
+    .booking-phone-number:hover { color: var(--accent); text-shadow: 0 0 18px rgba(216, 187, 152, 0.55); }
+    .booking-phone-hours { margin-top: 10px; font-size: 13px; color: var(--text-muted); }
+    .booking-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .booking-actions .btn { width: 100%; padding: 14px 16px; }
 
     /* Reduced motion & touch */
     @media (prefers-reduced-motion: reduce) {
@@ -711,9 +720,9 @@
       .principle-text { font-size: 13.5px; }
       .menu-tabs { margin: 0 -16px 26px; padding: 10px 16px 12px; }
       .banquet-box { padding: 24px 18px; gap: 28px; }
-      .banquet-list, .form-grid { grid-template-columns: 1fr; }
+      .banquet-list, .booking-actions { grid-template-columns: 1fr; }
       .banquet-list { margin: 20px 0 24px; gap: 10px; }
-      .banquet-box .btn { width: 100%; min-height: 48px; }
+      .banquet-box .btn, .booking-actions .btn { width: 100%; min-height: 48px; }
       .banquet-side { padding-top: 22px; gap: 18px 24px; display: grid; grid-template-columns: 1fr 1fr; }
       .banquet-side .stat-row:nth-child(2) { grid-column: 1 / -1; }
       .stat-big { font-size: 30px; }
@@ -732,9 +741,6 @@
       .modal-overlay.open .modal { transform: translateY(0); }
       .modal-close { top: 12px; right: 12px; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; font-size: 28px; }
       .modal-title { font-size: 26px; padding-right: 36px; }
-      .form-group input, .form-group select, .form-group textarea { font-size: 16px; padding: 12px 13px; min-height: 46px; border-radius: 0; -webkit-appearance: none; }
-      .form-group textarea { min-height: 76px; }
-      #bookingForm .btn { min-height: 50px; }
     }
 
     @media (max-width: 375px) {
@@ -953,7 +959,7 @@
             <div class="contact-group">
               <div class="contact-label">Телефон и бронирование</div>
               <div class="contact-value"><a href="tel:+79886668227">+7 (988) 666-82-27</a></div>
-              <div class="contact-sub">Приём заказов навынос и бронь столов</div>
+              <div class="contact-sub">Бронирование столов, банкетов и заказы навынос — только по телефону</div>
             </div>
             <div class="contact-group">
               <div class="contact-label">Режим работы</div>
@@ -1008,53 +1014,20 @@
     <button type="button" class="btn btn-primary" data-open-modal>Забронировать</button>
   </div>
 
-  <!-- BOOKING MODAL -->
+  <!-- BOOKING MODAL (PHONE ONLY) -->
   <div class="modal-overlay" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
       <button type="button" class="modal-close" id="closeModal" aria-label="Закрыть">×</button>
-      <h3 class="modal-title" id="modalTitle">Бронирование</h3>
-      <p class="modal-desc">Оставьте заявку — администратор свяжется с вами для подтверждения стола или банкета.</p>
-      <form id="bookingForm">
-        <div class="form-group">
-          <label for="guestName">Ваше имя</label>
-          <input type="text" id="guestName" name="name" placeholder="Александр" required />
-        </div>
-        <div class="form-group">
-          <label for="guestPhone">Телефон</label>
-          <input type="tel" id="guestPhone" name="phone" placeholder="+7 (900) 000-00-00" required />
-        </div>
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="bookingDate">Дата</label>
-            <input type="date" id="bookingDate" name="date" required />
-          </div>
-          <div class="form-group">
-            <label for="bookingTime">Время</label>
-            <input type="time" id="bookingTime" name="time" value="19:00" required />
-          </div>
-        </div>
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="bookingGuests">Количество гостей</label>
-            <input type="number" id="bookingGuests" name="guests" min="1" max="120" value="2" required />
-          </div>
-          <div class="form-group">
-            <label for="bookingType">Формат</label>
-            <select id="bookingType" name="type">
-              <option value="Столик">Бронь столика</option>
-              <option value="Банкет">Банкет / мероприятие</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="bookingComment">Пожелания</label>
-          <textarea id="bookingComment" name="comment" rows="2" placeholder="Предпочтения по залу или кухне"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">Отправить заявку</button>
-      </form>
-      <div class="form-success" id="formSuccess">
-        <strong>Заявка принята.</strong><br />
-        Для срочного подтверждения вы также можете позвонить администратору напрямую по номеру <a href="tel:+79886668227" style="color: var(--accent);">+7 (988) 666-82-27</a>.
+      <h3 class="modal-title" id="modalTitle">Бронирование стола</h3>
+      <p class="modal-desc" id="modalDesc">Бронирование доступно только по звонку. Позвоните администратору, чтобы выбрать стол и удобное время.</p>
+      <div class="booking-phone-box">
+        <span class="booking-phone-label">Телефон администратора</span>
+        <a href="tel:+79886668227" class="booking-phone-number">+7 (988) 666-82-27</a>
+        <div class="booking-phone-hours">Вт – Вс: 12:00 – 00:00 · Пн — выходной</div>
+      </div>
+      <div class="booking-actions">
+        <a href="tel:+79886668227" class="btn btn-primary">Позвонить</a>
+        <button type="button" class="btn btn-outline" id="copyPhoneBtn">Скопировать номер</button>
       </div>
     </div>
   </div>
@@ -1402,19 +1375,20 @@
 
     const modal = document.getElementById('bookingModal');
     const closeModalBtn = document.getElementById('closeModal');
-    const bookingForm = document.getElementById('bookingForm');
-    const formSuccess = document.getElementById('formSuccess');
-    const bookingTypeSelect = document.getElementById('bookingType');
-    const bookingDateInput = document.getElementById('bookingDate');
-    const today = new Date().toISOString().split('T')[0];
-    bookingDateInput.min = today;
-    bookingDateInput.value = today;
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const copyPhoneBtn = document.getElementById('copyPhoneBtn');
 
     function openModal(preset) {
       setMobileMenuState(false);
-      bookingForm.style.display = 'block';
-      formSuccess.style.display = 'none';
-      bookingTypeSelect.value = preset === 'banquet' ? 'Банкет' : 'Столик';
+      if (preset === 'banquet') {
+        modalTitle.textContent = 'Банкеты и торжества';
+        modalDesc.textContent = 'Бронирование и обсуждение банкетного меню доступны только по телефону. Позвоните администратору для уточнения свободных дат.';
+      } else {
+        modalTitle.textContent = 'Бронирование стола';
+        modalDesc.textContent = 'Бронирование доступно только по звонку. Позвоните администратору, чтобы выбрать стол и удобное время.';
+      }
+      if (copyPhoneBtn) copyPhoneBtn.textContent = 'Скопировать номер';
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
       if (mobileBottomBar) mobileBottomBar.classList.add('is-hidden');
@@ -1428,13 +1402,25 @@
     closeModalBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
-    bookingForm.addEventListener('submit', e => {
-      e.preventDefault();
-      bookingForm.style.display = 'none';
-      formSuccess.style.display = 'block';
-      bookingForm.reset();
-      bookingDateInput.value = today;
-    });
+
+    if (copyPhoneBtn) {
+      copyPhoneBtn.addEventListener('click', async () => {
+        const phone = '+7 (988) 666-82-27';
+        try {
+          await navigator.clipboard.writeText(phone);
+          copyPhoneBtn.textContent = 'Номер скопирован';
+        } catch {
+          const ta = document.createElement('textarea');
+          ta.value = phone;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          copyPhoneBtn.textContent = 'Номер скопирован';
+        }
+        setTimeout(() => { copyPhoneBtn.textContent = 'Скопировать номер'; }, 2200);
+      });
+    }
 
     (function initScrollEffects() {
       const header = document.querySelector('.header');
